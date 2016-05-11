@@ -1,0 +1,78 @@
+; <?php exit; ?> DO NOT REMOVE THIS LINE
+; file automatically generated or modified by Piwik; you can manually override the default values in global.ini.php by redefining them in this file.
+[database]
+host = <%= @db_host %>
+username = <%= @db_user %>
+password = <%= @db_password %>
+dbname = <%= @db_name %>
+tables_prefix = <%= @db_tables_prefix %>
+<% if not @db_port.nil? %>
+port = <%= @db_port %>
+<% end %>
+<%if not @db_adapter.nil? %>
+adapter = <%= @db_adapter %>
+<% end %>
+<% if not @db_engine.nil? %>
+type = <%= @db_engine %>
+<% end %>
+<% if not @db_schema.nil? %>
+schema = <%= @db_schema %>
+<% end %>
+<% if not @db_charset.nil? %>
+charset = <%= @db_charset %>
+<% end %>
+
+<% if not @node['piwik']['config']['database_tests'].nil? %>
+[database_tests]
+<% if not @node['piwik']['config']['database_tests']['host'].nil? %>
+host = <%= @node['piwik']['config']['database_tests']['host'] %>
+<% end %>
+<% if not @node['piwik']['config']['database_tests']['username'].nil? %>
+username = <%= @node['piwik']['config']['database_tests']['username'] %>
+<% end %>
+<% if not @node['piwik']['config']['database_tests']['password'].nil? %>
+password = <%= @node['piwik']['config']['database_tests']['password'] %>
+<% end %>
+<% if not @node['piwik']['config']['database_tests']['db_name'].nil? %>
+dbname = <%= @node['piwik']['config']['database_tests']['db_name'] %>
+<% end %>
+<% if not @node['piwik']['config']['database_tests']['tables_prefix'].nil? %>
+tables_prefix = <%= @node['piwik']['config']['database_tests']['tables_prefix'] %>
+<% end %>
+<% if not @node['piwik']['config']['database_tests']['port'].nil? %>
+port = <%= @node['piwik']['config']['database_tests']['port'] %>
+<% end %>
+<% if not @node['piwik']['config']['database_tests']['adapter'].nil? %>
+adapter = <%= @node['piwik']['config']['database_tests']['adapter'] %>
+<% end %>
+<% if not @node['piwik']['config']['database_tests']['type'].nil? %>
+type = <%= @node['piwik']['config']['database_tests']['type'] %>
+<% end %>
+<% if not @node['piwik']['config']['database_tests']['schema'].nil? %>
+schema = <%= @node['piwik']['config']['database_tests']['schema'] %>
+<% end %>
+<% if not @node['piwik']['config']['database_tests']['charset'].nil? %>
+charset = <%= @node['piwik']['config']['database_tests']['charset'] %>
+<% end %>
+<% end %>
+
+<% if not @node['piwik']['config']['tests'].nil? %>
+[tests]
+<% if not @node['piwik']['config']['tests']['http_host'].nil? %>
+http_host = <%= @node['piwik']['config']['tests']['http_host'] %>
+<% end %>
+<% if not @node['piwik']['config']['tests']['remote_addr'].nil? %>
+remote_addr = <%= @node['piwik']['config']['tests']['remote_addr'] %>
+<% end %>
+<% if not @node['piwik']['config']['tests']['request_uri'].nil? %>
+request_uri = <%= @node['piwik']['config']['tests']['request_uri'] %>
+<% end %>
+<% if not @node['piwik']['config']['tests']['port'].nil? %>
+port = <%= @node['piwik']['config']['tests']['port'] %>
+<% end %>
+<% end %>
+
+[General]
+salt = "<%= @general_salt %>"
+session_save_handler = "<%= @general_session_handler %>"
+trusted_hosts[] = "<%= @general_piwik_domain %>"
