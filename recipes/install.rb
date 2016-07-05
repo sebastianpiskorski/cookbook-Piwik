@@ -8,6 +8,26 @@
 #
 include_recipe 'piwik::config'
 
+if Dir["#{node['piwik']['dir']}/*"].empty?
+	git node['piwik']['dir'] do
+		repository node['piwik']['repository_url']
+		enable_submodules node['piwik']['enable_submodules']
+		revision node['piwik']['version']
+		depth 1
+		timeout 1800
+		user node['piwik']['user']
+		group node['piwik']['group']
+		action :checkout
+	end
+end
+
+composer_project node['piwik']['dir'] do
+	dev true
+	quiet false
+	prefer_dist false
+	action :install
+end
+
 piwik_git_plugin 'Fetch and activate ConsoleInstaller plugin' do
 	url 'https://github.com/kaz231/plugin-ConsoleInstaller.git'
 	name 'ConsoleInstaller'
