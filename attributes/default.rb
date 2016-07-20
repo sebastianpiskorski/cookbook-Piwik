@@ -12,20 +12,27 @@ default['php']['package_options'] = '--force-yes'
 # PHP-FPM
 default['php-fpm']['user'] = 'vagrant'
 default['php-fpm']['group'] = 'vagrant'
+default['php-fpm']['package_options'] = '--force-yes'
 
 # Nginx
 default['nginx']['user'] = 'vagrant'
 default['nginx']['group'] = 'vagrant'
+if node['platform'] == 'ubuntu'
+	default['nginx']['fastcgi'] = '/etc/nginx/fastcgi_params'
+else
+	default['nginx']['fastcgi'] = '/etc/nginx/fastcgi.conf'
+end
 
 # MariaDB
 default['mariadb']['server_root_password'] = 'vagrant'
 
 # PhantomJS
-default['phantomjs']['version'] = '2.1.1'
-default['phantomjs']['base_url'] = 'https://bitbucket.org/ariya/phantomjs/downloads'
+default['phantomjs']['version'] = '1.9.8'
+default['phantomjs']['base_url'] = 'file:///home/vagrant/phantomjs_versions'
 default['phantomjs']['basename'] = "phantomjs-#{node['phantomjs']['version']}-linux-#{node['kernel']['machine']}"
 
 # Piwik
+default['piwik']['home_dir'] = '/home/vagrant'
 default['piwik']['db'] = 'mariadb'
 default['piwik']['host_address'] = '127.0.0.1'
 default['piwik']['host_name'] = 'piwik.local'
@@ -48,7 +55,8 @@ default['piwik']['config'] = {
 	'general' => {
 		'salt' => SecureRandom.hex,
 		'session_handler' => 'dbtable',
-		'piwik_domain' => 'piwik.local'
+		'piwik_domain' => 'piwik.local',
+		'trusted_hosts[]' => 'piwik.local'
 	},
 	'database_tests' => {
 		'host' => '127.0.0.1',
@@ -78,10 +86,12 @@ default['piwik']['git']['user'] = 'vagrant'
 
 default['piwik']['gems'] = %w(
 	mysql2
+	travis
 )
 
-default['piwik']['php_packages'] = %w(
-	libmysqlclient-dev
+default['piwik']['packages'] = %w(
+	ruby
+	ruby-dev
 	php5-curl
 	php5-mysql
 	php5-gd

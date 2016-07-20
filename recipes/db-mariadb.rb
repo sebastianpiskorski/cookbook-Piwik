@@ -19,3 +19,26 @@ if node['platform'] == 'ubuntu'
 end
 
 include_recipe 'mariadb'
+
+if node['platform'] == 'ubuntu'
+	package 'libmysqlclient18' do
+		action :install
+		options '--force-yes'
+		version '10.0.26+maria-1~precise'
+	end
+
+	package 'mysql-common' do
+  	action :install
+		options '--force-yes'
+		version '10.0.26+maria-1~precise'
+	end
+
+	package 'libmariadbd-dev' do
+  	action :install
+	end
+else
+	package 'libmysqlclient-dev' do
+	  action :install
+		options '--force-yes'
+	end
+end

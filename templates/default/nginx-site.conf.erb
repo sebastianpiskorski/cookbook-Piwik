@@ -1,0 +1,23 @@
+server {
+    listen <%= @address %>;
+
+    root <%=  @directory %>;
+    index index.php;
+
+    server_name <%= @name %>;
+
+    access_log /var/log/nginx/<%= @name %>.access.log;
+    error_log /var/log/nginx/<%= @name %>.error.log;
+
+    location ~ [^/]\.php(/|$) {
+        fastcgi_split_path_info ^(.+\.php)(/.*)$;
+
+        if (!-f $document_root$fastcgi_script_name) {
+            return 404;
+        }
+
+        fastcgi_pass   unix:/var/run/php-fpm-www.sock;
+        fastcgi_index  index.php;
+        include        <%= node['nginx']['fastcgi'] %>;
+    }
+}

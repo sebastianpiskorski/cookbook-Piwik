@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 if !::File.exist?("#{node['piwik']['dir']}/config/config.ini.php")
-	template "#{node['piwik']['dir']}/config/config.ini.php" do
+	template "#{node['piwik']['dir']}/../config.ini.php" do
 		source 'config.ini.php.erb'
 		user node['piwik']['user']
 		group node['piwik']['group']
@@ -21,5 +21,6 @@ if !::File.exist?("#{node['piwik']['dir']}/config/config.ini.php")
 			:general_piwik_domain => node['piwik']['config']['general']['piwik_domain'],
 			:general_session_handler => node['piwik']['config']['general']['session_handler']
 		})
+		mode '0766'
 	end
 end

@@ -13,16 +13,49 @@ if node['platform'] == 'ubuntu'
 		components ['main']
 		deb_src true
 	end
+
+	#apt_repository 'team-mayhem-php5' do
+	#	uri 'http://ppa.launchpad.net/team-mayhem/ppa/ubuntu'
+	#	distribution 'precise'
+	#	components ['main']
+	#	deb_src true
+	#	key 'F442D7D7'
+	#	keyserver 'keyserver.ubuntu.com'
+	#end
 end
 
 include_recipe "piwik::db-#{node['piwik']['db']}"
+include_recipe 'nginx'
 include_recipe 'php'
 include_recipe 'php-fpm'
 include_recipe 'git'
 include_recipe 'composer'
 
-node['php_packages'].each do |php_package|
-	package php_package do
+hostsfile_entry node['piwik']['host_address'] do
+	hostname node['piwik']['host_name']
+	unique true
+end
+
+template "#{node['nginx']['dir']}/sites-enabled/piwik" do
+	source 'nginx-site.conf.erb'
+	variables({
+		:directory => node['piwik']['dir'],
+		:name => node['piwik']['host_name'],
+		:address => "#{node['piwik']['host_address']}:80"
+	})
+end
+
+node['piwik']['packages'].each do |piwikPackage|
+	package piwikPackage do
+		options '--force-yes'
+		action :install
+	end
+end
+
+node['piwik']['gems'].each do |piwikGem|
+	gem_package piwikGem
+	chef_gem piwikGem do
+		compile_time false
 		action :install
 	end
 end

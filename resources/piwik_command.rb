@@ -42,6 +42,8 @@ action :execute do
 		cwd node['piwik']['dir']
 		command piwikCommand
 		returns [0, 1, 2, 255]
+		user node['piwik']['user']
+		group node['piwik']['group']
 		action :run
 	end
 end
