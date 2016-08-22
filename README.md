@@ -1,6 +1,6 @@
 # piwik-cookbook
 
-TODO: Enter the cookbook description here.
+Setup Piwik with MariaDB + Nginx
 
 ## Supported Platforms
 
@@ -16,10 +16,10 @@ TODO: List your supported platforms.
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['piwik']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
+    <td><tt>['piwik']['user']</tt></td>
+    <td>String</td>
+    <td>Unix owner of project</td>
+    <td><tt>vagrant</tt></td>
   </tr>
 </table>
 
@@ -39,4 +39,4 @@ Include `piwik` in your node's `run_list`:
 
 ## License and Authors
 
-Author:: YOUR_NAME (<YOUR_EMAIL>)
+Author:: Kamil Zajac (kaz231@outlook.com)

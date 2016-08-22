@@ -16,6 +16,16 @@ if node['platform'] == 'ubuntu'
 		deb_src true
 		arch 'amd64'
 	end
+
+	apt_repository 'mariadb-nucleus' do
+		uri 'http://mariadb.mirror.nucleus.be/repo/10.0/ubuntu'
+		distribution 'precise'
+		components ['main']
+		keyserver 'keyserver.ubuntu.com'
+		key '0xcbcb082a1bb943db'
+		deb_src true
+		arch 'amd64'
+	end
 end
 
 include_recipe 'mariadb'
