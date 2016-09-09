@@ -33,14 +33,14 @@ include_recipe 'mariadb'
 if node['platform'] == 'ubuntu'
 	package 'libmysqlclient18' do
 		action :install
-		options '--force-yes -o Dpkg::Options::=\'--force-confnew\''
-		version '10.0.27+maria-1~precise'
+		options '--force-yes'
+		#version '10.0.27+maria-1~precise'
 	end
 
 	package 'mysql-common' do
   	action :install
 		options '--force-yes'
-		version '10.0.27+maria-1~precise'
+		#version '10.0.27+maria-1~precise'
 	end
 
 	package 'libmariadbd-dev' do

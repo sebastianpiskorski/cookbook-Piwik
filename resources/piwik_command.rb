@@ -44,6 +44,10 @@ action :execute do
 		returns [0, 1, 2, 255]
 		user node['piwik']['user']
 		group node['piwik']['group']
+		environment({
+			'HOME' => ::Dir.home(node['piwik']['user']),
+			'USER' => node['piwik']['user']
+		})
 		action :run
 	end
 end
