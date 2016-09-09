@@ -8,6 +8,8 @@
 #
 return if Dir.exist?(node['piwik']['dir']) and not Dir["#{node['piwik']['dir']}/*"].empty?
 
+ssh_known_hosts_entry 'github.com'
+
 git node['piwik']['dir'] do
 	repository node['piwik']['repository_url']
 	enable_submodules node['piwik']['enable_submodules']

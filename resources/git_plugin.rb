@@ -2,7 +2,7 @@
 # Cookbook Name:: piwik
 # Resource:: plugin
 #
-# Copyright (C) 2015 YOUR_NAME
+# Copyright (C) 2015 Kamil Zajac
 #
 # All rights reserved - Do Not Redistribute
 #
@@ -47,7 +47,7 @@ action :uninstall do
 
 	directory pluginDir	do
 		action :delete
-	end	
+	end
 end
 
 action :activate do

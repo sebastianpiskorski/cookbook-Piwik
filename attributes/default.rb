@@ -32,6 +32,7 @@ default['phantomjs']['base_url'] = 'file:///home/vagrant/phantomjs_versions'
 default['phantomjs']['basename'] = "phantomjs-#{node['phantomjs']['version']}-linux-#{node['kernel']['machine']}"
 
 # Piwik
+default['piwik']['nfs_optimization'] = false
 default['piwik']['home_dir'] = '/home/vagrant'
 default['piwik']['db'] = 'mariadb'
 default['piwik']['host_address'] = '127.0.0.1'
