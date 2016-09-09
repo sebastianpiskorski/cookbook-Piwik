@@ -14,6 +14,13 @@ if node['platform'] == 'ubuntu'
 		deb_src true
 	end
 
+        apt_repository 'ondrej-maria10' do
+                uri 'http://ppa.launchpad.net/ondrej/mariadb-10.0/ubuntu'
+                distribution 'precise'
+                components ['main']
+                deb_src true
+        end
+
 	#apt_repository 'team-mayhem-php5' do
 	#	uri 'http://ppa.launchpad.net/team-mayhem/ppa/ubuntu'
 	#	distribution 'precise'
@@ -22,6 +29,8 @@ if node['platform'] == 'ubuntu'
 	#	key 'F442D7D7'
 	#	keyserver 'keyserver.ubuntu.com'
 	#end
+
+        
 end
 
 include_recipe "piwik::db-#{node['piwik']['db']}"

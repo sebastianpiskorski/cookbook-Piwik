@@ -18,6 +18,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :private_network, type: 'dhcp'
   config.berkshelf.enabled = true
 
+  config.vm.provision "fix-no-tty", type: "shell" do |s|
+    s.privileged = false
+    s.inline = "sudo sed -i '/tty/!s/mesg n/tty -s \\&\\& mesg n/' /root/.profile"
+  end
+
   config.vm.provision :chef_solo do |chef|
     chef.run_list = [
       'recipe[piwik::default]'
