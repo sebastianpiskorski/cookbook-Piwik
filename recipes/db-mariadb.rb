@@ -34,13 +34,13 @@ if node['platform'] == 'ubuntu'
 	package 'libmysqlclient18' do
 		action :install
 		options '--force-yes'
-		version '10.0.26+maria-1~precise'
+		#version '10.0.26+maria-1~precise'
 	end
 
 	package 'mysql-common' do
   	action :install
 		options '--force-yes'
-		version '10.0.26+maria-1~precise'
+		#version '10.0.26+maria-1~precise'
 	end
 
 	package 'libmariadbd-dev' do
